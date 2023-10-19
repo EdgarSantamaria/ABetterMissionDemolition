@@ -6,7 +6,8 @@ public class Slingshot : MonoBehaviour
 {
     //fields set in the Unity pane
     [Header("Inscribed")]
-    public GameObject projectilePrefab;
+    // Array to store the projectiles
+    public GameObject[] projectilePrefabs;
     public float velocityMult = 10f;
     public GameObject projLinePrefab;
 
@@ -16,6 +17,8 @@ public class Slingshot : MonoBehaviour
     public Vector3 launchPos;
     public GameObject projectile;
     public bool aimingMode;
+
+    private int currentPrefabIndex = 0; // Index of the current projectile prefab
 
     private void Awake()
     {
@@ -43,8 +46,20 @@ public class Slingshot : MonoBehaviour
     {
         //The player has pressed the mouse button while over Slingshot
         aimingMode = true;
-        //Instantiate a Projectile
-        projectile = Instantiate(projectilePrefab) as GameObject;
+        // Randomly select a prefab
+        currentPrefabIndex = Random.Range(0, projectilePrefabs.Length);
+        //Instantiate a Projectile from the array of projectilePrefabs
+        projectile = Instantiate(projectilePrefabs[currentPrefabIndex]) as GameObject;
+        // Check if the selected prefab is a Missile and adjust velocityMult accordingly
+        if (projectile.CompareTag("Missile"))
+        {
+            velocityMult = 20.0f; // Adjust the value as needed for the Missile speed
+        }
+        else
+        {
+            velocityMult = 10.0f; // Set the default velocityMult for other projectiles
+        }
+
         //Start it at the launchPoint
         projectile.transform.position = launchPos;
         //Set it to isKinematic for now
@@ -91,5 +106,5 @@ public class Slingshot : MonoBehaviour
             MissionDemolition.SHOT_FIRED();
         }
     }
-
+    
 }
