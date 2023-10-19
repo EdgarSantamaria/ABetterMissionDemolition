@@ -1669,6 +1669,7 @@ MonoBehaviour:
   - {fileID: 747920037533604698, guid: e1caf9798861f0a4e9d8ba1c3e5b0edb, type: 3}
   - {fileID: 7770523804178333729, guid: 79af95e75a71947c5a5d2f11d0b67396, type: 3}
   - {fileID: 107420278373606358, guid: 6f90cfad1a6d241d9a88faa3313d40d4, type: 3}
+  - {fileID: 747920037533604698, guid: 818708a8622e94093a7d05630b434a35, type: 3}
   velocityMult: 10
   projLinePrefab: {fileID: 7552013585812372115, guid: 8ae7a117c9bafd54fa14e8ef1a3061b5, type: 3}
   launchPoint: {fileID: 0}

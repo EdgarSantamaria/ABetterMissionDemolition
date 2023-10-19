@@ -111,7 +111,7 @@ public class MissionDemolition : MonoBehaviour
         level++;
         shotsTaken = 0;
         shotsLeft = shotsLeft + 6; // increment the remaining shots towards the next level
-        if (level == levelMax)
+        if (level == levelMax-1)
         {
             Invoke("gameOver", 2f);
         }

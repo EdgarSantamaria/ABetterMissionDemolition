@@ -6,4 +6,3 @@ public class Missile : MonoBehaviour
 {
     public float missileSpeed = 20f; // missile's speed
 }
-
