@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _awake: 1
+  soundClip: {fileID: 8300000, guid: 28f4615be9fec411e9a8cbda502fe6d2, type: 3}
 --- !u!114 &-2794335158129135062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,6 +140,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4c1f4e37f0b7494bac7b2034a159477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boomerangSpeed: 20
-  travelDistance: 125
-  targetPrefab: {fileID: 1413228137896171395, guid: 548e1606906199e4f8d60014e339d7f0, type: 3}

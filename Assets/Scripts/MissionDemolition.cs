@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public enum GameMode
 {
@@ -13,10 +14,13 @@ public enum GameMode
 public class MissionDemolition : MonoBehaviour
 {
     static private MissionDemolition S;  //a private Singleton
+    public Slingshot slingshot;
+
 
     [Header("Inscribed")]
     public Text uitLevel;           //the UIText_level Text
     public Text uitShots;           //the UIText_shots Text
+    public Text uitLeft;            //the UIText_Left Text
     public Vector3 castlePos;       //the place to put the castles
     public GameObject[] castles;    //An array of the castles
 
@@ -28,6 +32,10 @@ public class MissionDemolition : MonoBehaviour
     public GameMode mode = GameMode.idle;
     public string showing = "Show Slingshot"; //FollowCam mode
 
+    // game conditions
+    public int shotsLeft;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +43,7 @@ public class MissionDemolition : MonoBehaviour
 
         level = 0;
         shotsTaken = 0;
+        shotsLeft = 6;
         levelMax = castles.Length;
         StartLevel();
     }
@@ -70,6 +79,7 @@ public class MissionDemolition : MonoBehaviour
         //Show the data in the GUITexts
         uitLevel.text = "Level: " + (level + 1) + " of " + levelMax;
         uitShots.text = "Shots Taken: " + shotsTaken;
+        uitLeft.text = "Shots Left: " + (shotsLeft - 1);
     }
 
     // Update is called once per frame
@@ -87,16 +97,23 @@ public class MissionDemolition : MonoBehaviour
             //Start the next level in 2 seconds
             Invoke("NextLevel", 2f);
         }
-
+        else if (shotsLeft == 0)
+        {
+            Invoke("gameOver", 2f);
+        }
     }
-
+    void gameOver()
+    {
+        SceneManager.LoadScene("Game_Over");
+    }
     void NextLevel()
     {
         level++;
+        shotsTaken = 0;
+        shotsLeft = shotsLeft + 6; // increment the remaining shots towards the next level
         if (level == levelMax)
         {
-            level = 0;
-            shotsTaken = 0;
+            Invoke("gameOver", 2f);
         }
         StartLevel();
     }
@@ -105,6 +122,7 @@ public class MissionDemolition : MonoBehaviour
     static public void SHOT_FIRED()
     {
         S.shotsTaken++;
+        S.shotsLeft--;
     }
 
     //Static method that allows code anywhere to get a reference to S.castle

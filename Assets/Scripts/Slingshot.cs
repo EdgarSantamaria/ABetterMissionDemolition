@@ -60,6 +60,7 @@ public class Slingshot : MonoBehaviour
             velocityMult = 10.0f; // Set the default velocityMult for other projectiles
         }
 
+
         //Start it at the launchPoint
         projectile.transform.position = launchPos;
         //Set it to isKinematic for now

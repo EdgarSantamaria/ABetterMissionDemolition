@@ -22,6 +22,8 @@ public class Projectile : MonoBehaviour
     private List<float> deltas = new List<float>();
     private Rigidbody rigid;
 
+    public AudioClip soundClip;
+
     void Start()
     {
         rigid = GetComponent<Rigidbody>();
@@ -71,6 +73,15 @@ public class Projectile : MonoBehaviour
         foreach(Projectile p in PROJECTILES)
         {
             Destroy(p.gameObject);
+        }
+    }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Material"))
+        {
+            // Play the sound when the projectile collides
+            AudioManager.instance.PlaySound(soundClip);
         }
     }
 }
